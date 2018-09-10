@@ -12,13 +12,13 @@ class NeuralNetork:
             self.W.append(w/np.sqrt(layers[i]))
 
         w = np.random.randn(layers[-2]+1, layers[-1])
-        self.W.append(w)
+        self.W.append(w/ np.sqrt(layers[-2]))
 
     def __repr__(self):
         return "NeuralNetworks: {}".format("-".join(str(l) for l in self.layers))
 
     def sigmoid(self, x):
-        return np.exp(1/(1+np.exp(x)))
+        return 1.0/(1+np.exp(-x))
 
     def sigmoid_derive(self, x):
         return x * (1 - x)
@@ -73,8 +73,3 @@ class NeuralNetork:
         loss = 0.5 * np.sum((predictions - targets) ** 2)
 
         return loss
-
-
-
-
-
