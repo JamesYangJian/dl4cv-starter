@@ -25,6 +25,7 @@ from CONV import ShallowNet
 if __name__ == '__main__':
     ap =argparse.ArgumentParser()
     ap.add_argument('-d', '--dataset', required=True, help='path to input dataset')
+    ap.add_argument('-m', '--model', required=True, help='file to save the trained model')
     args = vars(ap.parse_args())
 
     print('[INFO] Loading images...')
@@ -53,6 +54,8 @@ if __name__ == '__main__':
     print('[INFO] evaluating....')
     predictions = model.predict(testX, batch_size=32)
     print(classification_report(testY.argmax(axis=1), predictions.argmax(axis=1), target_names = ['cat', 'dog', 'panda']))
+
+    model.save(args['model'])
 
 
     plt.style.use('ggplot')
